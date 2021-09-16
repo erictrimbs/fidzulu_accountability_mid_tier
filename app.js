@@ -1,6 +1,14 @@
 const request = require('request');
 
-//SERVER STARTER CODE-----------------------------------------------
+//---------------BACKEND REQUEST EXAMPLE --------------------------------------------
+
+request('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    console.log(body.url);
+    console.log(body.explanation);
+});
+
+//-----------------SERVER STARTER CODE-----------------------------------------------
 
 // Require express and create an instance of it
 var express = require('express');
@@ -11,9 +19,12 @@ app.get('/', function (req, res) {
     res.send('<b>My</b> first express http server');
 });
 
-// On localhost:3000/welcome
-app.get('/welcome', function (req, res) {
-    res.send('<b>Hello</b> welcome to my http server made with express');
+app.get('/zulu/team', function (req, res) {
+    res.send('TODO: get from backend');
+});
+
+app.get('/zulu/servicename', function (req, res) {
+    res.send('TODO: parse url for location and get from backend');
 });
 
 // Change the 404 message modifing the middleware
@@ -22,18 +33,10 @@ app.use(function (req, res, next) {
 });
 
 // start the server in the port 3000 !
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000.');
+app.listen(3021, function () {
+    console.log('Example app listening on port 3021.');
 });
 
 
 
 
-// REQUEST EXAMPLE --------------------------------------------
-
-
-request('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
-    console.log(body.url);
-    console.log(body.explanation);
-});
