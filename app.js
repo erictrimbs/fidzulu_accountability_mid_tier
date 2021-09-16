@@ -5,21 +5,51 @@ const express = require('express');
 const app = express();
 
 app.get('/classA/:servicename/team', function (req, res) {
-    res.send('TODO: get from backend');
+    const serviceName = req.params.serviceName.toLowerCase();
+
+    if (serviceName != 'bike' && serviceName != 'food' && serviceName != 'toys') {
+        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bike', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+        return
+    }
+
+    let port;
+
+    if (serviceName == 'bike')
+        port = 3031
+    else if (serviceName == 'food')
+        port = 3032
+    else if (serviceName == 'toys')
+        port = 3033
+
+    const url = "http://localhost:" + port + '/' + serviceName + '/team';
+
+    request(url, { json: true }, (err, backRes, body) => {
+
+        if (err) {
+            console.log(err);
+            midRes.status(500).send("Backend returned error: " + err)
+            return
+        }
+
+        midRes.send(body);
+    });
+
+
 });
 
-app.get('/classA/:serviceName/all/:location', function (req, res) {
+app.get('/classA/:serviceName/all/:location', function (req, midRes) {
     const serviceName = req.params.serviceName.toLowerCase();
     const location = req.params.location.toLowerCase();
 
     console.log(location != 'raleigh' && location != 'durham', location);
 
     if (location != 'raleigh' && location != 'durham') {
-        res.status(404).send("Invalid location " + location + "; valid locations are 'Raleigh' and 'Durham' at http://localhost:3031/classA/:serviceName/all/:location");
+        midRes.status(404).send("Invalid location " + location + "; valid locations are 'Raleigh' and 'Durham' at http://localhost:3031/classA/:serviceName/all/:location");
         return
     }
     if (serviceName != 'bike' && serviceName != 'food' && serviceName != 'toys') {
-        res.status(404).send("Invalid service name " + serviceName + "; available service names are 'bike', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bike', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+        return
     }
 
     let port;
@@ -32,17 +62,17 @@ app.get('/classA/:serviceName/all/:location', function (req, res) {
         port = 3033
 
     const url = "http://localhost:" + port + '/' + serviceName + '/all/' + location;
-    let response;
 
-    // request(url, { json: true }, (err, res, body) => {
-    //     if (err) { return console.log(err); }
-    //     console.log(body.url);
-    //     console.log(body.explanation);
+    request(url, { json: true }, (err, backRes, body) => {
 
-    response = { "request is": "valid", 'service name': serviceName, 'location': location };
-    // });
+        if (err) {
+            console.log(err);
+            midRes.status(500).send("Backend returned error: " + err)
+            return
+        }
 
-    res.send(response);
+        midRes.send(body);
+    });
 });
 
 // Change the 404 message modifing the middleware
