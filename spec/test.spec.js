@@ -2,6 +2,7 @@ const request = require("request");
 
 const base_url = 'http://localhost:3021/classA/';
 
+// TODO: change to proper response format
 const mockResponseBikeDurham = { 'request is': 'valid', 'service name': 'bike', 'location': 'durham' };
 const mockResponseFoodDurham = { 'request is': 'valid', 'service name': 'food', 'location': 'durham' };
 const mockResponseToysDurham = { 'request is': 'valid', 'service name': 'toys', 'location': 'durham' };
@@ -10,17 +11,12 @@ const mockResponseBikeRaleigh = { 'request is': 'valid', 'service name': 'bike',
 const mockResponseFoodRaleigh = { 'request is': 'valid', 'service name': 'food', 'location': 'raleigh' };
 const mockResponseToysRaleigh = { 'request is': 'valid', 'service name': 'toys', 'location': 'raleigh' };
 
-describe("Server should", () => {
-    // describe("GET /", () => {
-    //     it("and return <b>My</b> first express http server", (done) => {
-    //         request.get(base_url, (error, response, body) => {
-    //             expect(body).toBeTruthy();
-    //             expect(body).toContain("<b>My</b> first express http server");
-    //             done();
-    //         });
-    //     });
-    // });
+// TODO: Add correct names to array
+const teamMembersBike = { 'team': 'bike', 'membersName': ['string'] }
+const teamMembersFood = { 'team': 'food', 'membersName': ['string'] }
+const teamMembersToys = { 'team': 'toys', 'membersName': ['string'] }
 
+describe("Server should", () => {
     describe("GET /:servicename/all/:location", () => {
         it("and return all bikes in durham", (done) => {
             request.get(base_url + 'bike/all/durham', (error, response, body) => {
@@ -85,14 +81,30 @@ describe("Server should", () => {
         });
     });
 
-    // describe("GET /servicename/team", () => {
-    //     it("and return <b>My</b> first express http server", (done) => {
-    //         request.get(base_url, (error, response, body) => {
-    //             expect(body).toBeTruthy();
-    //             expect(body).toContain("<b>My</b> first express http server");
-    //             done();
-    //         });
-    //     });
-    // });
+    describe("GET /:servicename/team", () => {
+        it("and return all team members for bike", (done) => {
+            request.get(base_url + 'bike/team', (error, response, body) => {
+                expect(body).toBeTruthy();
+                expect(body).toContain(JSON.stringify(teamMembersBike));
+                done();
+            });
+        });
+
+        it("and return all team members for food", (done) => {
+            request.get(base_url + 'food/team', (error, response, body) => {
+                expect(body).toBeTruthy();
+                expect(body).toContain(JSON.stringify(teamMembersFood));
+                done();
+            });
+        });
+
+        it("and return all team members for toys", (done) => {
+            request.get(base_url + 'toys/team', (error, response, body) => {
+                expect(body).toBeTruthy();
+                expect(body).toContain(JSON.stringify(teamMembersToys));
+                done();
+            });
+        });
+    });
 
 });
