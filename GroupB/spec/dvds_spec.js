@@ -1,4 +1,5 @@
 const request = require("request");
+const data = require('../data/dvdsteam.json');
 const url = 'http://localhost:3022';
 
 describe("DVDS Test", function () {
@@ -18,6 +19,16 @@ describe("DVDS Test", function () {
         it("returns status code 404",  (done) => {
             request.get(url + '/classb/dvvds', (error, response, body) => {
                 expect(response.statusCode).toBe(404);
+                done();
+            });
+        });
+    });
+
+    describe("GET classb/dvds/team", () => {
+        it ("returns status code 200", (done) => {
+            request.get(url + '/classb/dvds/team', (error, response, body) => {
+                expect(response.statusCode).toBe(200);
+                expect(response.body).toBe(data);
                 done();
             });
         });
