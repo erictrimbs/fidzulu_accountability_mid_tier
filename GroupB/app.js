@@ -1,7 +1,9 @@
 const request = require('request');
 var express = require('express');
 var path = require('path');
-var indexRouter = require('./routes/index');
+var booksRouter = require('./routes/books');
+var dvdsRouter = require('./routes/dvds');
+var laptopsRouter = require('./routes/laptops');
 
 //SERVER STARTER CODE-----------------------------------------------
 
@@ -9,22 +11,16 @@ var indexRouter = require('./routes/index');
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/classb/books', booksRouter);
+app.use('/classb/dvds', dvdsRouter);
+app.use('/classb/laptops', laptopsRouter);
 
-app.use('/', indexRouter);
 
 // start the server in the port 3000 !
 app.listen(3022, function () {
-    console.log('Example app listening on port 3022.');
+    console.log('Class B middle tier listening on port 3022.');
 });
 
-
-
-
-// REQUEST EXAMPLE --------------------------------------------
-
-
-// request('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', { json: true }, (err, res, body) => {
-//     if (err) { return console.log(err); }
-//     console.log(body.url);
-//     console.log(body.explanation);
-// });
+app.use(function (req, res, next) {
+    res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
+});
