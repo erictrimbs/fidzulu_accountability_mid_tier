@@ -9,8 +9,11 @@ module.exports = router;
 
 router.get('/team', function(req, res, next) {
     request(urlPort + '/dvds/team', { json: true }, (error, response, body) => {
-        if (error) { return console.log(error); }
-        res.send(body);
+        if (error) { 
+            res.status(404).send("Not responsive to dvds/team");
+            return console.log(error); 
+        }
+        res.status(200).send(body);
     });
 });
 
