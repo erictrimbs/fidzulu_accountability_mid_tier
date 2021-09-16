@@ -5,13 +5,13 @@ const request = require('request');
 // const url = require('url');
 module.exports = router;
 const homeUrl = 'http://localhost:';
-const backendPort = 3036;
+const backendPort = 3034;
 const urlPort = homeUrl + backendPort;
 
 /* GET home page. */
 
 router.get('/team', function(req, res, next) {
-    request('http://localhost:3034/books/team', { json: true }, (error, response, body) => {
+    request(urlPort + '/books/team', { json: true }, (error, response, body) => {
         if (error) { return console.log(error); }
         res.send(JSON.stringify(body));
     });
