@@ -1,1 +1,1 @@
-# fidzulu_accountability_mid_teir
+# fidzulu_accountability_mid_tier
