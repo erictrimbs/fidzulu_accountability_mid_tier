@@ -1,19 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-// const createError = require('http-errors');
-// const url = require('url');
-module.exports = router;
 const homeUrl = 'http://localhost:';
 const backendPort = 3034;
 const urlPort = homeUrl + backendPort;
 
-/* GET home page. */
+module.exports = router;
 
 router.get('/team', function(req, res, next) {
     request(urlPort + '/books/team', { json: true }, (error, response, body) => {
         if (error) { return console.log(error); }
-        res.send(JSON.stringify(body));
+        res.send(body);
     });
 });
 
@@ -23,11 +20,11 @@ router.get('/all/:location', function(req, res, next) {
             res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
             return console.log(error); 
         }
-        res.send(JSON.stringify(body));
+        res.send(body);
     });
 });
 
 // request('http://localhost:8081/contacts', { json: true }, (error, response, body) => {
 //     if (error) { return console.log(error); }
-//     res.send(JSON.stringify(body));
+//     res.send(body);
 // });
