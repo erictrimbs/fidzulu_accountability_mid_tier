@@ -11,10 +11,9 @@ const mockResponseBikeRaleigh = { 'request is': 'valid', 'service name': 'bike',
 const mockResponseFoodRaleigh = { 'request is': 'valid', 'service name': 'food', 'location': 'raleigh' };
 const mockResponseToysRaleigh = { 'request is': 'valid', 'service name': 'toys', 'location': 'raleigh' };
 
-// TODO: Add correct names to array
-const teamMembersBike = { 'team': 'bike', 'membersName': ['string'] }
-const teamMembersFood = { 'team': 'food', 'membersName': ['string'] }
-const teamMembersToys = { 'team': 'toys', 'membersName': ['string'] }
+const teamMembersBike = { 'team': 'bike', 'membersName': ['Aidan Lee', 'Byron Martinez', 'Connor Renquin', 'Noor Helbaoui'] }
+const teamMembersFood = { 'team': 'food', 'membersName': ['Tiffany Ngo', 'Rhea Bhatia', 'Marissa Greise', 'Gary Chen'] }
+const teamMembersToys = { 'team': 'toys', 'membersName': ['Alex Eseyin', 'Anjana Rajmani', 'Jacob DiSpirito', 'Melissa Parkinson'] }
 
 describe("Server should", () => {
     describe("GET /:servicename/all/:location", () => {
