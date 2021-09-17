@@ -1,8 +1,10 @@
 const request = require('request');
-
-// Require express and create an instance of it
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
+
+app.use(cors())
 
 app.get('/classA/:servicename/team', function (req, res) {
     const serviceName = req.params.serviceName.toLowerCase();
