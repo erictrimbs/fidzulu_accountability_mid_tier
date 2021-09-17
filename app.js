@@ -1,14 +1,16 @@
 const request = require('request');
-
-// Require express and create an instance of it
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 
-app.get('/classA/:servicename/team', function (req, res) {
+app.use(cors())
+
+app.get('/classA/:serviceName/team', function (req, midRes) {
     const serviceName = req.params.serviceName.toLowerCase();
 
     if (serviceName != 'bikes' && serviceName != 'food' && serviceName != 'toys') {
-        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bikes', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bikes', 'food', and 'toys' at http://localhost:3031//classA/:servicename/team");
         return
     }
 
