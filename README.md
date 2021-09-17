@@ -1,6 +1,5 @@
 # fidzulu_accountability_mid_tier
 
-Developers: 
+Run (dev + prod):
 npm install
-npm install -g nodemon
-nodemon app.js
+npm start

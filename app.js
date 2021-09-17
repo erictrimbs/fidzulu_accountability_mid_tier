@@ -1,40 +1,88 @@
 const request = require('request');
 
-//---------------BACKEND REQUEST EXAMPLE --------------------------------------------
-
-request('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
-    console.log(body.url);
-    console.log(body.explanation);
-});
-
-//-----------------SERVER STARTER CODE-----------------------------------------------
-
 // Require express and create an instance of it
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-// on the request to root (localhost:3000/)
-app.get('/', function (req, res) {
-    res.send('<b>My</b> first express http server');
+app.get('/classA/:servicename/team', function (req, res) {
+    const serviceName = req.params.serviceName.toLowerCase();
+
+    if (serviceName != 'bikes' && serviceName != 'food' && serviceName != 'toys') {
+        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bikes', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+        return
+    }
+
+    let port;
+
+    if (serviceName == 'bikes')
+        port = 3031
+    else if (serviceName == 'food')
+        port = 3032
+    else if (serviceName == 'toys')
+        port = 3033
+
+    const url = "http://localhost:" + port + '/' + serviceName + '/team';
+
+    request(url, { json: true }, (err, backRes, body) => {
+
+        if (err) {
+            console.log(err);
+            midRes.status(500).send("Backend returned error: " + err)
+            return
+        }
+
+        midRes.send(body);
+    });
+
+
 });
 
-app.get('/zulu/team', function (req, res) {
-    res.send('TODO: get from backend');
-});
+app.get('/classA/:serviceName/all/:location', function (req, midRes) {
+    const serviceName = req.params.serviceName.toLowerCase();
+    const location = req.params.location.toLowerCase();
 
-app.get('/zulu/servicename', function (req, res) {
-    res.send('TODO: parse url for location and get from backend');
+    console.log(location != 'raleigh' && location != 'durham', location);
+
+    if (location != 'raleigh' && location != 'durham') {
+        midRes.status(404).send("Invalid location " + location + "; valid locations are 'Raleigh' and 'Durham' at http://localhost:3031/classA/:serviceName/all/:location");
+        return
+    }
+    if (serviceName != 'bikes' && serviceName != 'food' && serviceName != 'toys') {
+        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bikes', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+        return
+    }
+
+    let port;
+
+    if (serviceName == 'bikes')
+        port = 3031
+    else if (serviceName == 'food')
+        port = 3032
+    else if (serviceName == 'toys')
+        port = 3033
+
+    const url = "http://localhost:" + port + '/' + serviceName + '/all/' + location;
+
+    request(url, { json: true }, (err, backRes, body) => {
+
+        if (err) {
+            console.log(err);
+            midRes.status(500).send("Backend returned error: " + err)
+            return
+        }
+
+        midRes.send(body);
+    });
 });
 
 // Change the 404 message modifing the middleware
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
+    res.status(404).send("Sorry, that route doesn't exist. Valid routes are '/classA/:serviceName/all/:location' and '/classA/:servicename/team'.");
 });
 
-// start the server in the port 3000 !
+// start the server in the port 3021 !
 app.listen(3021, function () {
-    console.log('Example app listening on port 3021.');
+    console.log('Example app listening on port 3021. http://localhost:3021/');
 });
 
 
