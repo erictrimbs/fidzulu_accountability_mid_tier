@@ -3,24 +3,24 @@ const request = require("request");
 const base_url = 'http://localhost:3021/classA/';
 
 // TODO: change to proper response format
-const mockResponseBikeDurham = { 'request is': 'valid', 'service name': 'bike', 'location': 'durham' };
+const mockResponseBikesDurham = { 'request is': 'valid', 'service name': 'bike', 'location': 'durham' };
 const mockResponseFoodDurham = { 'request is': 'valid', 'service name': 'food', 'location': 'durham' };
 const mockResponseToysDurham = { 'request is': 'valid', 'service name': 'toys', 'location': 'durham' };
 
-const mockResponseBikeRaleigh = { 'request is': 'valid', 'service name': 'bike', 'location': 'raleigh' };
+const mockResponseBikesRaleigh = { 'request is': 'valid', 'service name': 'bike', 'location': 'raleigh' };
 const mockResponseFoodRaleigh = { 'request is': 'valid', 'service name': 'food', 'location': 'raleigh' };
 const mockResponseToysRaleigh = { 'request is': 'valid', 'service name': 'toys', 'location': 'raleigh' };
 
-const teamMembersBike = { 'team': 'bike', 'membersName': ['Aidan Lee', 'Byron Martinez', 'Connor Renquin', 'Noor Helbaoui'] }
+const teamMembersBikes = { 'team': 'bikes', 'membersName': ['Aidan Lee', 'Byron Martinez', 'Connor Renquin', 'Noor Helbaoui'] }
 const teamMembersFood = { 'team': 'food', 'membersName': ['Tiffany Ngo', 'Rhea Bhatia', 'Marissa Greise', 'Gary Chen'] }
 const teamMembersToys = { 'team': 'toys', 'membersName': ['Alex Eseyin', 'Anjana Rajmani', 'Jacob DiSpirito', 'Melissa Parkinson'] }
 
 describe("Server should", () => {
     describe("GET /:servicename/all/:location", () => {
         it("and return all bikes in durham", (done) => {
-            request.get(base_url + 'bike/all/durham', (error, response, body) => {
+            request.get(base_url + 'bikes/all/durham', (error, response, body) => {
                 expect(body).toBeTruthy();
-                expect(body).toContain(JSON.stringify(mockResponseBikeDurham));
+                expect(body).toContain(JSON.stringify(mockResponseBikesDurham));
                 done();
             });
         });
@@ -42,9 +42,9 @@ describe("Server should", () => {
         });
 
         it("and return all bikes in raleigh", (done) => {
-            request.get(base_url + 'bike/all/raleigh', (error, response, body) => {
+            request.get(base_url + 'bikes/all/raleigh', (error, response, body) => {
                 expect(body).toBeTruthy();
-                expect(body).toContain(JSON.stringify(mockResponseBikeRaleigh));
+                expect(body).toContain(JSON.stringify(mockResponseBikesRaleigh));
                 done();
             });
         });
@@ -81,10 +81,10 @@ describe("Server should", () => {
     });
 
     describe("GET /:servicename/team", () => {
-        it("and return all team members for bike", (done) => {
-            request.get(base_url + 'bike/team', (error, response, body) => {
+        it("and return all team members for bikes", (done) => {
+            request.get(base_url + 'bikes/team', (error, response, body) => {
                 expect(body).toBeTruthy();
-                expect(body).toContain(JSON.stringify(teamMembersBike));
+                expect(body).toContain(JSON.stringify(teamMembersBikes));
                 done();
             });
         });
