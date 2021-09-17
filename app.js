@@ -7,14 +7,14 @@ const app = express();
 app.get('/classA/:servicename/team', function (req, res) {
     const serviceName = req.params.serviceName.toLowerCase();
 
-    if (serviceName != 'bike' && serviceName != 'food' && serviceName != 'toys') {
-        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bike', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+    if (serviceName != 'bikes' && serviceName != 'food' && serviceName != 'toys') {
+        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bikes', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
         return
     }
 
     let port;
 
-    if (serviceName == 'bike')
+    if (serviceName == 'bikes')
         port = 3031
     else if (serviceName == 'food')
         port = 3032
@@ -47,14 +47,14 @@ app.get('/classA/:serviceName/all/:location', function (req, midRes) {
         midRes.status(404).send("Invalid location " + location + "; valid locations are 'Raleigh' and 'Durham' at http://localhost:3031/classA/:serviceName/all/:location");
         return
     }
-    if (serviceName != 'bike' && serviceName != 'food' && serviceName != 'toys') {
-        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bike', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
+    if (serviceName != 'bikes' && serviceName != 'food' && serviceName != 'toys') {
+        midRes.status(404).send("Invalid service name " + serviceName + "; available service names are 'bikes', 'food', and 'toys' at http://localhost:3031/classA/:serviceName/all/:location");
         return
     }
 
     let port;
 
-    if (serviceName == 'bike')
+    if (serviceName == 'bikes')
         port = 3031
     else if (serviceName == 'food')
         port = 3032
@@ -77,7 +77,7 @@ app.get('/classA/:serviceName/all/:location', function (req, midRes) {
 
 // Change the 404 message modifing the middleware
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
+    res.status(404).send("Sorry, that route doesn't exist. Valid routes are '/classA/:serviceName/all/:location' and '/classA/:servicename/team'.");
 });
 
 // start the server in the port 3021 !
