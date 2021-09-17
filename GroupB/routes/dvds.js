@@ -18,7 +18,7 @@ router.get('/team', function(req, res, next) {
 });
 
 router.get('/all/:location', function(req, res, next) {
-    request(urlPort + '/dvds/all/' + req.params.location, { json: true }, (error, response, body) => {
+    request(urlPort + '/dvds/all/' + req.params.location.toLowerCase(), { json: true }, (error, response, body) => {
         if (error) { 
             res.status(404).send("Sorry, that route doesn't exist. Have a nice day :)");
             return console.log(error); 
