@@ -1,0 +1,31 @@
+{
+  "name": "fidzulu_accountability_mid_tier",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "jasmine-node --captureExceptions spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erictrimbs/fidzulu_accountability_mid_tier.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erictrimbs/fidzulu_accountability_mid_tier/issues"
+  },
+  "homepage": "https://github.com/erictrimbs/fidzulu_accountability_mid_tier#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "jasmine": "^3.9.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "jasmine-node": "^3.0.0",
+    "nodemon": "^2.0.12"
+  }
+}
