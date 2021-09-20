@@ -41,8 +41,6 @@ app.get('/classA/:serviceName/all/:location', function (req, midRes) {
     const serviceName = req.params.serviceName.toLowerCase();
     const location = req.params.location.toLowerCase();
 
-    console.log(location != 'raleigh' && location != 'durham', location);
-
     if (location != 'raleigh' && location != 'durham') {
         midRes.status(404).send("Invalid location " + location + "; valid locations are 'Raleigh' and 'Durham' at http://localhost:3031/classA/:serviceName/all/:location");
         return
